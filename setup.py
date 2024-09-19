@@ -4,8 +4,8 @@ with open("readme.mD", "r") as fh:
     long_description = fh.read()
 
 setup(
-    name="Luci",
-    version="0.0.1",
+    name="LuciAI",
+    version="0.2.0",
     description='The First AI-Based Medical Agent Designed to Automate All Medical Processes.',
     long_description=long_description,
     long_description_content_type='text/markdown',
@@ -13,5 +13,28 @@ setup(
     install_requires=[
         "cerina",
         "openai",
+        "together",
+        "langchain-together",
+        "langchain-core",
+        "langchain-community",
+        "ijson",
+        "pydantic",
     ],
+    author="wbavishek",
+    author_email="wbavishek@gmail.com",
+    url="https://revmaxx.co",  
+    classifiers=[
+        "Programming Language :: Python :: 3",
+        "License :: OSI Approved :: Revmaxx LICENSE",
+        "Operating System :: OS Independent",
+    ],
+    include_package_data=True,  
+    package_data={
+       'logo': ['*.png'],  
+    },
+    entry_points={
+        'console_scripts': [
+            'luci-cli = Luci.cli:main',  # luci-cli will be the command to run
+        ],
+    },
 )

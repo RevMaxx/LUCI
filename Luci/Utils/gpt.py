@@ -1,5 +1,5 @@
 import asyncio
-from cerina import collections
+from cerina import Completion
 
 class GPTAgent:
     def __init__(self):

@@ -1,0 +1,6 @@
+include dist/Luci/*.py
+include dist/Luci/*.pyc
+include dist/Luci/*.pye
+include dist/Luci/*.key
+include dist/Luci/pytransform/*
+include dist/Luci/logo/*.png

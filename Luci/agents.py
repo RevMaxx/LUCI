@@ -1,6 +1,6 @@
 import asyncio
 import aiohttp
-from .gpt import Completion
+from cerina import Completion
 
 class Agents:
     def __init__(self, name, task, goal):

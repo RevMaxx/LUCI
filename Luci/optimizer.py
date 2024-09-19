@@ -1,6 +1,6 @@
 import aiohttp
 from typing import Optional
-from .gpt import Completion
+from .Utils.gpt import Completion
 
 class PromptOptimizer:
     def __init__(self, model: Optional[str] = None, token: Optional[str] = None):

@@ -1,2 +1,7 @@
 cerina
 openai
+together
+langchain-together
+langchain-core
+langchain-community
+ijson
