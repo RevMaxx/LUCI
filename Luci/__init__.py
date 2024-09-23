@@ -1,14 +1,13 @@
 from .Utils.gpt import GPTAgent, SyncGPTAgent
 from .optimizer import PromptOptimizer
-from .agents import *
 from .Agents.search import *
 from .Agents.soap import *
 from .Agents.chain import *
-from .Agents.chat_agent import ChatAgent
+from .Agents.chat_agent import *
 from .Agents.super_agent import *
 from .Core.search_text import *
 from .Core.search_image import *
-from .Models.model import ChatModel
+from .Models.model import *
 
 
 __all__ = [

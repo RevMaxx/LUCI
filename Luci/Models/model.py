@@ -6,7 +6,7 @@ import together
 from together import AsyncTogether, Together
 
 class ChatModel:
-    def __init__(self, model_name, api_key, prompt, SysPrompt):
+    def __init__(self, model_name, api_key, prompt, SysPrompt=None):
         self.model_name = model_name or os.environ.get('model_name')
         if self.model_name is None:
             raise ValueError("Model Name has not been set! Kindly provide a valid model name.")
@@ -17,61 +17,38 @@ class ChatModel:
         if not prompt:
             raise ValueError("Provide a prompt to proceed..")
         self.client = OpenAI(api_key=self.api_key)
-        self.SysPrompt = SysPrompt or "System"
-
-
-    async def call_openai(self, messages=None, stream=False):
-        # If no messages are passed, create a default message using prompt and SysPrompt
-        if messages is None:
-            messages = [{"role": self.SysPrompt, "content": self.prompt}]
-        
-        # Call the OpenAI API for either streaming or non-streaming response
-        if not stream:
-            # If not streaming, return the result directly
-            result = self.client.chat.completions.create(
-                model=self.model_name,
-                messages=messages
-            )
-            return result
-        else:
-            # If streaming, yield chunks of content as they arrive
-            result = self.client.chat.completions.create(
-                model=self.model_name,
-                messages=messages,
-                stream=True  # Enable streaming
-            )
-            for chunk in result:
-                if chunk.choices[0].delta.content is not None:
-                    # Yield the streaming content chunk by chunk
-                    yield chunk.choices[0].delta.content
-
+        self.SysPrompt = SysPrompt or "system"
 
     def call_gpt(self, messages=None, stream=False):
         if messages is None:
-            messages = [{"role": self.SysPrompt, "content": self.prompt}]
-        
-        # Call the OpenAI API for either streaming or non-streaming response
+            messages = [
+                {"role": "Medical AI", "content": "You are an advanced medical AI"},
+                {"role": self.SysPrompt, "content": self.prompt}
+            ]
+
         if not stream:
-            # If not streaming, return the result directly
+            # Non-streaming case
             result = self.client.chat.completions.create(
                 model=self.model_name,
                 messages=messages
             )
-            return result
+            return result.choices[0].message.content  # Return the message content directly
         else:
-            # If streaming, yield chunks of content as they arrive
-            result = self.client.chat.completions.create(
+            # Streaming case
+            response = self.client.chat.completions.create(
                 model=self.model_name,
                 messages=messages,
                 stream=True  # Enable streaming
             )
-            for chunk in result:
+            full_response = ""
+            for chunk in response:
                 if chunk.choices[0].delta.content is not None:
-                    # Yield the streaming content chunk by chunk
-                    yield chunk.choices[0].delta.content
+                    full_response += chunk.choices[0].delta.content
+            return full_response  # Return the full accumulated response
 
 
-    async def azureopenai(self, api_version, api_base, deployment_name):
+
+    async def call_azure(self, api_version, api_base, deployment_name):
         api_version = os.environ.get('api_version')
         api_base = os.environ.get('api_base')
         deployment_name = os.environ.get('deployment_name')
@@ -89,7 +66,8 @@ class ChatModel:
                 client.chat.completions.create(
                     model=deployment_name,
                     messages=[
-                        {"role": self.SysPrompt, "content": self.prompt},
+                        {"role": "system", "content": "Advanced Medical AI Agent"},
+                        {"role": "user", "content": self.prompt}
                     ]
                 )
             )
@@ -101,7 +79,7 @@ class ChatModel:
             # Handle Authentication error here, e.g. invalid API key
             return f"API returned an Authentication Error: {e}"
         
-    def azureopenai(self, api_version, api_base, deployment_name):
+    def call_azure_sync(self, api_version, api_base, deployment_name):
         api_version = os.environ.get('api_version')
         api_base = os.environ.get('api_base')
         deployment_name = os.environ.get('deployment_name')
@@ -118,9 +96,11 @@ class ChatModel:
             response = client.chat.completions.create(
                             model=deployment_name,
                             messages=[
-                                {"role": self.SysPrompt, "content": self.prompt},]
+                                {"role": "system", "content": "Advanced Medical AI Agent"},
+                                {"role": self.SysPrompt, "content": self.prompt}
+                                ]
                             )
-
+            
             # print the response
             return response.choices[0].message.content
 
@@ -129,28 +109,16 @@ class ChatModel:
             return f"API returned an Authentication Error: {e}"
 
     
-    def together_ai(self):
+    def call_together(self):
 
         client = Together(api_key=self.api_key)
 
         messages = [
-        {"role": self.SysPrompt, "content": self.prompt},
+        {"role": "system", "content": "Advanced Medical AI Agent"},
+        {"role": "user", "content": self.prompt}
         ]
         response = client.chat.completions.create(
         model=self.model_name,
         messages=messages,
         )
-        return response.choices[0].message
-    
-
-
-
-
-        
-
-
-
-
-       
-    
-    
+        return response.choices[0].message 

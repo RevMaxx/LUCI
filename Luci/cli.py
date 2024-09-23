@@ -1,9 +1,10 @@
 import argparse
-from Luci.Agents.soap import create_soap
-from Luci.gpt import SyncGPTAgent
+from Luci.Agents.soap import SoapAgent
+from Luci.Utils.gpt import SyncGPTAgent
 
 def generate_soap_note(model, api_key, subjective, objective, assessment, plan, master_prompt, connected):
-    create_soap(
+    soap_agent = SoapAgent(model_name=model, api_key=api_key, connected=connected)
+    soap_agent.create_soap(
         model=model,
         api_key=api_key,
         S=subjective,
