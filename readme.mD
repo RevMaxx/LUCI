@@ -10,7 +10,52 @@ pip install LuciAI
 
 ## Usage
 
-## Chain Agents
+After installing luci - go to your terminal and type luci_cli
+
+### Ask Any Query
+
+```bash
+luci-cli gpt "Your Query?"
+```
+
+### Agentic Search
+
+```bash
+luci-cli search "COVID-19 symptoms" --type text --async-mode --max-results 5
+```
+
+- Change --type to `text` or `image`
+- If you choose asynchronous mode then add it `--async-mode`
+- If you want to use synchronous then remove it
+
+### Models
+
+Choose your model and find their respective methods!
+
+|FUNCTION NAME | METHOD | TYPE |
+| TOGETHER     | call_together | ASYNC |
+| OPENAI       | call_gpt | SYNC |
+| AZURE OPENAI | call_azure | ASYNC |
+| 2 AZURE OPENAI | call_azure_sync | SYNC |
+
+```python
+from Luci.Models.model import ChatModel
+
+# Initialize the ChatModel class
+chat_model = ChatModel(
+    model_name="meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo",  # Specify your model name
+    api_key="aea3aab7b8275c73f7b171588bf030cf6f0e51f8c638f1bfb8ffbe919332d99d",  # Your OpenAI API key
+    prompt="What is the weather today?"
+)
+
+# Call the method that generates a response
+result = chat_model.call_together()
+
+# Print the result
+print(result)
+```
+
+### Chain of Thoughts
 
 ```python
 import asyncio
@@ -37,14 +82,13 @@ async def main():
     )
 
     print("Generated Master Prompt:", master_prompt)
-```
 
 # Run the async main function
 if __name__ == "__main__":
     asyncio.run(main())
 ```
 
-## Searching any Query
+### Searching any Query
 
 ```python
 from Luci.Agents import Search
@@ -78,7 +122,13 @@ results = search_instance.search_images(max_results=5)
 search_instance.print_text_result(results)
 ```
 
-## Generate SOAP Notes
+### Generate SOAP Notes through CLI
+
+```bash
+python cli.py soap --model "your_model" --api-key "your_api_key" --subjective "..." --objective "..." --assessment "..." --plan "..." --master-prompt "..." --connected
+```
+
+### Generate SOAP Notes
 
 ```python
 from Luci.Agents.soap import *
