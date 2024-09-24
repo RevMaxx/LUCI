@@ -1,6 +1,6 @@
 ## LUCI 
 
-The first AI-based medical agent designed to automate all medical processes.
+Luci is the first AI-based medical agent designed to automate a wide range of healthcare processes. Luci also facilitates advanced tasks like generating master prompts that interconnect and enabling custom search queries for text or images, all with simple Python calls. It helps professionals handle everything from generating SOAP notes to performing agentic searches, assisting with GPT queries, and even creating personalized AI models.
 
 ## Installation
 
@@ -15,14 +15,17 @@ After installing luci - go to your terminal and type luci_cli
 ### Ask Any Query
 
 ```bash
-luci-cli gpt "Your Query?"
+luci-cli cerina "Your Query?"
 ```
+![alt text](image.png)
 
 ### Agentic Search
 
 ```bash
 luci-cli search "COVID-19 symptoms" --type text --async-mode --max-results 5
 ```
+
+You can switch between text and image searches, and toggle asynchronous mode by adding --async-mode.
 
 - Change --type to `text` or `image`
 - If you choose asynchronous mode then add it `--async-mode`
@@ -36,8 +39,9 @@ Choose your model and find their respective methods!
 | -------------| ------------- | -------------|
 | TOGETHER     | call_together | ASYNC |
 | OPENAI       | call_gpt | SYNC |
+| OPENAI       | call_async_gpt | ASYNC |
 | AZURE OPENAI | call_azure | ASYNC |
-| 2 AZURE OPENAI | call_azure_sync | SYNC |
+| AZURE OPENAI | call_azure_sync | SYNC |
 
 ```python
 from Luci.Models.model import ChatModel
@@ -47,6 +51,7 @@ chat_model = ChatModel(
     model_name="meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo",  # Specify your model name
     api_key="aea3aab7b8275c73f7b171588bf030cf6f0e51f8c638f1bfb8ffbe919332d99d",  # Your OpenAI API key
     prompt="What is the weather today?"
+    #SysPrompt = "You can mention your system prompt here"
 )
 
 # Call the method that generates a response
@@ -54,39 +59,6 @@ result = chat_model.call_together()
 
 # Print the result
 print(result)
-```
-
-### Chain of Thoughts
-
-```python
-import asyncio
-from Luci import create_master_prompt
-
-async def main():
-    # Define API key and model
-    api_key = ""
-    model_name = "cerina"  # Could be "together" or "cerina"
-
-    # Define your list of prompts
-    prompts = [
-        "Generate a summary of the latest AI research.",
-        "Explain the benefits of using AI in healthcare."
-    ]
-
-    # Generate master prompt using the standalone function
-    master_prompt = await create_master_prompt(
-        api_key=api_key,
-        model_name=model_name,
-        prompts=prompts,
-        connected=True,  # Set to True to enable passing info between prompts
-        search=True  # Set to True to enable search functionality
-    )
-
-    print("Generated Master Prompt:", master_prompt)
-
-# Run the async main function
-if __name__ == "__main__":
-    asyncio.run(main())
 ```
 
 ### Searching any Query
@@ -101,7 +73,7 @@ results = search_instance.search_text(max_results=5)
 search_instance.print_text_result(results)
 ```
 
-## Get the JSON Response of the Search Query
+### Get the JSON Response of the Search Query
 
 ```python
 from Luci import search_text
@@ -111,7 +83,7 @@ query="Recent trends of AI?"
 print(search_text(query, max_results=3))
 ```
 
-## Search any Image
+### Search any Image
 
 ```python
 from Luci import Search
@@ -147,6 +119,38 @@ M = "Generate a detailed SOAP note based on the inputs. Follow headings and sub-
     # Create an instance of the SoapAgent class
 soap_agent = SoapAgent(model_name=model_name, api_key=api_key, connected=True)
 soap_agent.create_soap(S, O, A, P, M)
+```
+### Chain of Thoughts
+
+```python
+import asyncio
+from Luci import create_master_prompt
+
+async def main():
+    # Define API key and model
+    api_key = ""
+    model_name = "cerina"  # Could be "together" or "cerina"
+
+    # Define your list of prompts
+    prompts = [
+        "Generate a summary of the latest AI research.",
+        "Explain the benefits of using AI in healthcare."
+    ]
+
+    # Generate master prompt using the standalone function
+    master_prompt = await create_master_prompt(
+        api_key=api_key,
+        model_name=model_name,
+        prompts=prompts,
+        connected=True,  # Set to True to enable passing info between prompts
+        search=True  # Set to True to enable search functionality
+    )
+
+    print("Generated Master Prompt:", master_prompt)
+
+# Run the async main function
+if __name__ == "__main__":
+    asyncio.run(main())
 ```
 
 ## Contributing

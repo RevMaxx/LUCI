@@ -45,7 +45,33 @@ class ChatModel:
                 if chunk.choices[0].delta.content is not None:
                     full_response += chunk.choices[0].delta.content
             return full_response  # Return the full accumulated response
+        
+    async def call_async_gpt(self, messages=None, stream=False):
+        if messages is None:
+            messages = [
+                {"role": "Medical AI", "content": "You are an advanced medical AI"},
+                {"role": self.SysPrompt, "content": self.prompt}
+            ]
 
+        if not stream:
+            # Non-streaming case
+            result = await self.client.chat.completions.create(
+                model=self.model_name,
+                messages=messages
+            )
+            return result.choices[0].message.content  # Return the message content directly
+        else:
+            # Streaming case
+            response = await self.client.chat.completions.create(
+                model=self.model_name,
+                messages=messages,
+                stream=True  # Enable streaming
+            )
+            full_response = ""
+            async for chunk in response:
+                if chunk.choices[0].delta.content is not None:
+                    full_response += chunk.choices[0].delta.content
+            return full_response  # Return the full accumulated response
 
 
     async def call_azure(self, api_version, api_base, deployment_name):

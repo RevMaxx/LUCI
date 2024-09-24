@@ -70,8 +70,8 @@ def main():
     soap_parser.add_argument("--connected", action="store_true", help="Check if all sections are added")
 
     # GPT agent for other tasks
-    gpt_parser = subparsers.add_parser("gpt", help="Get a response from LUCIGPT")
-    gpt_parser.add_argument("query", help="Query to ask GPT")
+    gpt_parser = subparsers.add_parser("cerina", help="Get a response from cerina")
+    gpt_parser.add_argument("query", help="Query to ask cerina")
 
     # Agentic search feature
     search_parser = subparsers.add_parser("search", help="Perform an agentic search")
@@ -93,9 +93,9 @@ def main():
             master_prompt=args.master_prompt,
             connected=args.connected
         )
-    elif args.command == "gpt":
+    elif args.command == "cerina":
         response = sync_gpt_response(args.query)
-        print(f"GPT Response: {response}")
+        print(f"Medical Assistant: {response}")
     
     elif args.command == "search":
     # Run agentic search asynchronously if --async-mode is passed
