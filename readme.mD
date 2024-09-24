@@ -33,6 +33,7 @@ luci-cli search "COVID-19 symptoms" --type text --async-mode --max-results 5
 Choose your model and find their respective methods!
 
 |FUNCTION NAME | METHOD | TYPE |
+| -------------| ------------- | -------------|
 | TOGETHER     | call_together | ASYNC |
 | OPENAI       | call_gpt | SYNC |
 | AZURE OPENAI | call_azure | ASYNC |
