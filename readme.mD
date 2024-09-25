@@ -24,6 +24,7 @@ luci-cli cerina "Your Query?"
 ```bash
 luci-cli search "COVID-19 symptoms" --type text --async-mode --max-results 5
 ```
+![alt text](image-1.png)
 
 You can switch between text and image searches, and toggle asynchronous mode by adding --async-mode.
 
@@ -98,7 +99,7 @@ search_instance.print_text_result(results)
 ### Generate SOAP Notes through CLI
 
 ```bash
-python cli.py soap --model "your_model" --api-key "your_api_key" --subjective "..." --objective "..." --assessment "..." --plan "..." --master-prompt "..." --connected
+luci-cli soap --model "your_model" --api-key "your_api_key" --subjective "..." --objective "..." --assessment "..." --plan "..." --master-prompt "..." --connected
 ```
 
 ### Generate SOAP Notes
@@ -120,6 +121,49 @@ M = "Generate a detailed SOAP note based on the inputs. Follow headings and sub-
 soap_agent = SoapAgent(model_name=model_name, api_key=api_key, connected=True)
 soap_agent.create_soap(S, O, A, P, M)
 ```
+
+### Voice Documentation
+
+Voice dictation for clinical notes, transcribing speech to text, and structuring it into standardized formats like SOAP notes.
+
+```python
+from Luci.Agents.voice_documentation_agent import VoiceDocumentationAgent
+
+agent = VoiceDocumentationAgent(
+    model_name='',  # Replace with your model name
+    api_key='',   # Replace with your Together API key
+    method='call_together' #mention here method
+)
+agent.run()
+```
+### CLI EXAMPLE
+
+```bash
+luci-cli voice_doc --model-name <MODEL_NAME> --api-key <API_KEY> [--method <METHOD>] [--stop-word <STOP_WORD>]
+```
+
+### Medical Search Agent
+
+Search the new papers on pubmed through luci!
+
+```python
+from Luci.Agents.medica_search_agent import MedicalSearchAgent
+
+email = "wbavishek@gmail.com"
+max_results = 5
+query = "diabetes treatment guidelines"
+
+agent = MedicalSearchAgent(email=email, max_results=max_results)
+articles = agent.search(query)
+agent.print_results(articles)
+```
+### CLI Example
+
+```python
+luci-cli medsearch "diabetes treatment guidelines" --email "wbavishekbhattacharjee@gmail.com"
+ --max-results 2
+```
+
 ### Chain of Thoughts
 
 ```python

@@ -1,0 +1,25 @@
+**Subjective (Chief Complaint and History of Present Illness)**
+
+- Chief Complaint: The patient is experiencing a headache.
+- History of Present Illness: The patient reports occasional headaches accompanied by vomiting. They have been taking paracetamol for relief.
+
+**Objective (Vital Signs and Physical Examination)**
+
+- Blood Pressure: 128 mmHg
+- Blood Sugar: 180 mg/dL
+- Other symptoms: Vomiting (occasional)
+
+**Assessment (Diagnosis and Differential Diagnosis)**
+
+- The patient's symptoms of headache and occasional vomiting may be indicative of a variety of conditions, including:
+  - Migraine
+  - Tension headache
+  - Viral gastroenteritis
+  - Other possible causes of headache and vomiting
+
+**Plan (Treatment and Follow-up)**
+
+- Continue taking paracetamol as prescribed for headache relief
+- Monitor blood pressure and blood sugar levels
+- Further evaluation and investigation may be necessary to determine the underlying cause of the symptoms
+- Consider referral to a specialist (e.g. neurologist or gastroenterologist) for further assessment and management.

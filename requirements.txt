@@ -5,3 +5,6 @@ langchain-together
 langchain-core
 langchain-community
 ijson
+speechrecognition 
+pyaudio
+biopython

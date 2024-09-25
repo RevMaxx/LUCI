@@ -21,6 +21,9 @@ setup(
         "ijson",
         "pydantic",
         "gradio",
+        "speechrecognition",
+        "pyaudio",
+        "biopython"
     ],
     author="wbavishek",
     author_email="wbavishek@gmail.com",
