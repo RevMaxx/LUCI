@@ -11,6 +11,8 @@ from .Models.model import *
 from .Agents.voice_documentation_agent import *
 from .Core.medical_search import *
 from .Agents.medica_search_agent import *
+from .Agents.agent import *
+from .Utils.agent_utils import *
 
 __all__ = [
     "GPTAgent",
@@ -27,5 +29,8 @@ __all__ = [
     "format_to_soap",
     "save_soap_note_to_file",
     "MedicalSearch",
-    "MedicalSearchAgent"
+    "MedicalSearchAgent",
+    "Agent",
+    "SearchTool",
+    "load_agent_from_yaml"
 ]

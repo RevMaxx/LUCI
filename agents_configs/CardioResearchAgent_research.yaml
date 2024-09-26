@@ -1,0 +1,10 @@
+name: CardioResearchAgent
+objective: Identify and evaluate the most effective treatments for heart disease, focusing on the latest research and clinical guidelines.
+task: Conduct a comprehensive analysis of current heart disease treatments, including pharmacological options, lifestyle modifications, and emerging therapies.
+precautions:
+  - Utilize only the most recent and validated research studies.
+  - Cross-check information against reputable medical databases and guidelines.
+  - Avoid reliance on anecdotal evidence or unverified sources.
+  - Ensure that all findings are relevant to current clinical practices.
+tool: SearchTool
+email: youremail@gmail.com

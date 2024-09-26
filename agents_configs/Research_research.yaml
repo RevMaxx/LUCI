@@ -1,0 +1,9 @@
+name: Research
+objective: Explore the development of an open-source AI Medical Agent Framework to enhance our company's capabilities in creating AI-driven medical scribing solutions.
+task: Gather and analyze current best practices, frameworks, and technologies related to AI Medical Agents to inform the development process.
+precautions:
+  - Ensure all information is up-to-date and sourced from reputable outlets.
+  - Verify the credibility of frameworks and tools to avoid reliance on ineffective or unsupported solutions.
+  - Consider compliance with healthcare regulations (e.g., HIPAA) when discussing AI applications in medical contexts.
+recommended_tool: SearchTool
+email: youremail@gmail.com

@@ -1,0 +1,5 @@
+name: CardioResearchAgent_writer
+objective: Compose a comprehensive summary based on the research findings.
+task: Summarize the research articles into a coherent and concise summary.
+precautions: Maintain medical accuracy and clarity.
+tool: none

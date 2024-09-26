@@ -23,7 +23,8 @@ setup(
         "gradio",
         "speechrecognition",
         "pyaudio",
-        "biopython"
+        "biopython",
+        "pyyaml"
     ],
     author="wbavishek",
     author_email="wbavishek@gmail.com",
