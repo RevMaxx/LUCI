@@ -5,7 +5,7 @@ with open("readme.mD", "r") as fh:
 
 setup(
     name="LuciAI",
-    version="0.2.0",
+    version="0.5.0",
     description='The First AI-Based Medical Agent Designed to Automate All Medical Processes.',
     long_description=long_description,
     long_description_content_type='text/markdown',
@@ -22,7 +22,6 @@ setup(
         "pydantic",
         "gradio",
         "speechrecognition",
-        "pyaudio",
         "biopython",
         "pyyaml"
     ],

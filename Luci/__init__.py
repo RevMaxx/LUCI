@@ -13,6 +13,7 @@ from .Core.medical_search import *
 from .Agents.medica_search_agent import *
 from .Agents.agent import *
 from .Utils.agent_utils import *
+from .Utils.rxnorm import *
 
 __all__ = [
     "GPTAgent",
@@ -32,5 +33,6 @@ __all__ = [
     "MedicalSearchAgent",
     "Agent",
     "SearchTool",
-    "load_agent_from_yaml"
+    "load_agent_from_yaml",
+    "RxNorm"
 ]
